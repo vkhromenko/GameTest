@@ -1,1 +1,9 @@
 C:\Users\vkhromenko\Documents\Visual Studio 2015\Projects\Logon_project\GameTest\bin\Debug\GameTest.exe.config
+C:\Users\vkhromenko\Documents\Visual Studio 2015\Projects\Logon_project\GameTest\bin\Debug\GameTest.exe
+C:\Users\vkhromenko\Documents\Visual Studio 2015\Projects\Logon_project\GameTest\bin\Debug\GameTest.pdb
+C:\Users\vkhromenko\Documents\Visual Studio 2015\Projects\Logon_project\GameTest\obj\Debug\GameTest.Properties.Resources.resources
+C:\Users\vkhromenko\Documents\Visual Studio 2015\Projects\Logon_project\GameTest\obj\Debug\GameTest.csproj.GenerateResource.Cache
+C:\Users\vkhromenko\Documents\Visual Studio 2015\Projects\Logon_project\GameTest\obj\Debug\GameTest.exe
+C:\Users\vkhromenko\Documents\Visual Studio 2015\Projects\Logon_project\GameTest\obj\Debug\GameTest.pdb
+C:\Users\vkhromenko\Documents\Visual Studio 2015\Projects\Logon_project\GameTest\obj\Debug\GameTest.GameForm.resources
+C:\Users\vkhromenko\Documents\Visual Studio 2015\Projects\Logon_project\GameTest\obj\Debug\GameTest.csprojResolveAssemblyReference.cache
