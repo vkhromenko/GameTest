@@ -44,21 +44,30 @@ namespace GameTest
 
             Block[] blocksTemp = new Block[4];
 
-            blocks.CopyTo(blocksTemp, 0);
-
+            for(int i = 0; i < blocks.Length; i++)
+            {
+                blocksTemp[i] = blocks[i].Clone() as Block;
+            }
             for (int i = 0; i < blocks.Length; i++)
             {
-                tmpYY = blocksTemp[i].Y;
-                if (!((tmpYY += 1 * GameForm.SPEED) >= GameForm.HEIGHT))
+                if (blocksTemp[i] != null)
                 {
-                    blocksTemp[i].Y += 1 * GameForm.SPEED;
+                    tmpYY = blocksTemp[i].Y;
+                    if (!((tmpYY += 1 * GameForm.SPEED) >= GameForm.HEIGHT))
+                    {
+                        blocksTemp[i].Y += 1 * GameForm.SPEED;
+                        flag = true;
+                    }
+                    else
+                    {
+                        flag = false;
+                        break;
+                    }
                 }
-                else
-                {
+                else {
                     flag = false;
                     break;
                 }
-                flag = true;
             }
             if (flag)
             {
@@ -67,9 +76,58 @@ namespace GameTest
             return flag;
         }
 
+        public void MoveLeft()
+        {
+            if (blocks[0].X > 0 && blocks[1].X > 0 && blocks[2].X > 0 && blocks[3].X > 0)
+            {
+                for (int i = 0; i < blocks.Length; i++)
+                {
+                    blocks[i].X--;
+                }
+            }
+        }
+
+        public void MoveRight()
+        {
+            if (blocks[0].X < GameForm.WIDTH - 1 && blocks[1].X < GameForm.WIDTH - 1 && blocks[2].X < GameForm.WIDTH - 1 && blocks[3].X < GameForm.WIDTH - 1)
+            {
+                for (int i = 0; i < blocks.Length; i++)
+                {
+                    blocks[i].X++;
+                }
+            }
+        }
+
         public void Rotate()
         {
+            if (this.GetType().Name != "OShape")
+            {
+                bool flag = true; //флаг проверки на границу поля
+                Block[] blocksTemp = new Block[4];
 
+                for (int i = 0; i < blocks.Length; i++)
+                {
+                    blocksTemp[i] = blocks[i].Clone() as Block;
+                }
+
+
+                for (int i = 1; i < blocksTemp.Length; i++)
+                {
+                    blocksTemp[i].X = blocks[0].X - (blocks[i].Y - blocks[0].Y);
+
+                    if (blocksTemp[i].X < 0 || blocksTemp[i].X >= GameForm.WIDTH)
+                    {
+                        flag = false;
+                        break;
+                    }
+                    blocksTemp[i].Y = blocks[0].Y + (blocks[i].X - blocks[0].X);
+                }
+
+                if (flag)
+                {
+                    blocks = blocksTemp;
+                }
+            }
         }
     }
 }

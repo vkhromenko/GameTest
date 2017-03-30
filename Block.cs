@@ -35,13 +35,14 @@ namespace GameTest
         DimGray,
     }
 
-    class Block
+    class Block : ICloneable
     {
         public int X { get; set; }
         public int Y { get; set; }
+        public BlockColor color;
 
         private Brush[] brushColor = new SolidBrush[] { new SolidBrush(Color.Blue), new SolidBrush(Color.DarkGreen), new SolidBrush(Color.Brown),
-                                      new SolidBrush(Color.DarkOrange), new SolidBrush(Color.DarkSlateBlue), new SolidBrush(Color.DimGray) };
+                                      new SolidBrush(Color.DarkOrange), new SolidBrush(Color.DarkSlateBlue), new SolidBrush(Color.DimGray), new SolidBrush(Color.Teal) };
 
         internal Brush brush;
 
@@ -49,12 +50,18 @@ namespace GameTest
         {
             X = startX;
             Y = startY;
+            this.color = color;
             brush = brushColor[(int)color];
         }
 
         public void PaintBlock(BufferedGraphics g)
         {
             g.Graphics.FillRectangle(brush, X * GameForm.SCALE + 1, Y * GameForm.SCALE + 1, GameForm.SCALE - 1, GameForm.SCALE - 1);
+        }
+
+        public object Clone()
+        {
+            return new Block(this.X, this.Y, color);
         }
     }
 }
