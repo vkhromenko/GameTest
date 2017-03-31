@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,11 +30,11 @@ namespace GameTest
             blocks[0] = new Block(startX, startY, color);
         }
 
-        public void PaintShape()
+        public void PaintShape(BufferedGraphics buffer)
         {
             for(int i = 0; i < blocks.Length; i++)
             {
-                blocks[i].PaintBlock(GameForm.mainBuffer);
+                blocks[i].PaintBlock(buffer);
             }
         }
 
@@ -109,7 +110,6 @@ namespace GameTest
                 {
                     blocksTemp[i] = blocks[i].Clone() as Block;
                 }
-
 
                 for (int i = 1; i < blocksTemp.Length; i++)
                 {

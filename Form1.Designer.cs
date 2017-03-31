@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.pbMain = new System.Windows.Forms.PictureBox();
+            this.lbScore = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pnPrev = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
             this.SuspendLayout();
             // 
@@ -40,23 +43,60 @@
             this.pbMain.TabIndex = 0;
             this.pbMain.TabStop = false;
             // 
+            // lbScore
+            // 
+            this.lbScore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbScore.AutoSize = true;
+            this.lbScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbScore.Location = new System.Drawing.Point(409, 22);
+            this.lbScore.Name = "lbScore";
+            this.lbScore.Size = new System.Drawing.Size(36, 39);
+            this.lbScore.TabIndex = 1;
+            this.lbScore.Text = "0";
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(398, 71);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(68, 25);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Score";
+            // 
+            // pnPrev
+            // 
+            this.pnPrev.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnPrev.Location = new System.Drawing.Point(380, 122);
+            this.pnPrev.Name = "pnPrev";
+            this.pnPrev.Size = new System.Drawing.Size(112, 121);
+            this.pnPrev.TabIndex = 3;
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(494, 623);
+            this.Controls.Add(this.pnPrev);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lbScore);
             this.Controls.Add(this.pbMain);
             this.Name = "GameForm";
             this.Text = "Form1";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.PictureBox pbMain;
+        private System.Windows.Forms.Label lbScore;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel pnPrev;
     }
 }
 

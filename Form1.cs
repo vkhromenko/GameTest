@@ -16,8 +16,10 @@ namespace GameTest
         public static int HEIGHT = 25;
         public static int SCALE = 30;
         public static int SPEED = 1;
+        public static int SCORE = 0;
 
         Shape shape;
+        Shape prevShape;
 
         private Timer timer;
 
@@ -25,7 +27,12 @@ namespace GameTest
         public BufferedGraphicsContext mainContext;
         public static BufferedGraphics mainBuffer;
 
+        public Graphics prevGraphics;
+        public BufferedGraphicsContext prevContext;
+        public static BufferedGraphics prevBuffer;
+
         public Random globalRandom;
+        public Random prevRandom;
 
         List<Block> gameMap;
 
@@ -33,7 +40,7 @@ namespace GameTest
         public GameForm()
         {
             InitializeComponent();
-            this.ClientSize = new Size(WIDTH * SCALE + 100, HEIGHT * SCALE);
+            this.ClientSize = new Size(WIDTH * SCALE + 130, HEIGHT * SCALE);
             pbMain.ClientSize = new Size(WIDTH * SCALE, HEIGHT * SCALE);
             pbMain.BackColor = Color.LightGray;
 
@@ -41,13 +48,18 @@ namespace GameTest
             mainContext = new BufferedGraphicsContext();
             mainBuffer = mainContext.Allocate(mainGraphics, new Rectangle(0, 0, pbMain.Width, pbMain.Height));
 
+            prevGraphics = pnPrev.CreateGraphics();
+            prevContext = new BufferedGraphicsContext();
+            prevBuffer = prevContext.Allocate(prevGraphics, new Rectangle(0, 0, pnPrev.Width, pnPrev.Height));
+
             globalRandom = new Random(DateTime.Now.Millisecond);
+            prevRandom = new Random(DateTime.Now.Millisecond + 365);
             gameMap = new List<Block>();
 
             timer = new Timer();
         }
 
-        public void RepaintForm(BufferedGraphics mainBuffer)
+        public void RepaintForm()
         {
             mainBuffer.Graphics.Clear(Color.Ivory);
             PrintGrid.PrintGridFromForm(mainBuffer);
@@ -56,8 +68,42 @@ namespace GameTest
             {
                 block.PaintBlock(mainBuffer);
             }
-            shape.PaintShape();
+            shape.PaintShape(mainBuffer);
             mainBuffer.Render();
+            lbScore.Text = SCORE.ToString();
+        }
+
+        private void ClearForm()
+        {
+            mainBuffer.Graphics.Clear(Color.Ivory);
+            PrintGrid.PrintGridFromForm(mainBuffer);
+            prevBuffer.Graphics.Clear(Color.LightGray);
+            gameMap.Clear();
+            shape = null;
+            prevShape = null;
+            timer.Dispose();
+        }
+
+        public void RepaintForm(BufferedGraphics prevBuffer)
+        {
+            prevBuffer.Graphics.Clear(Color.FromArgb(0xF0, 0xF0, 0xF0));
+
+            if (prevShape != null)
+            {
+                for (int j = 0; j < prevShape.Count; j++)
+                {
+                    prevShape[j].Y += 4;
+                    prevShape[j].X -= 6;
+                }
+
+                prevShape.PaintShape(prevBuffer);
+                prevBuffer.Render();
+                for (int j = 0; j < prevShape.Count; j++)
+                {
+                    prevShape[j].Y -= 4;
+                    prevShape[j].X += 6;
+                }
+            }
         }
 
         private bool AdditionBlocks(Shape shape)
@@ -125,7 +171,7 @@ namespace GameTest
             for (int i = 0; i < gameMap.Count; i++)
             {
                 tmp = gameMap[i];
-                counter =1;
+                counter = 1;
 
                 for (int j = 0; j < gameMap.Count; j++)
                 {
@@ -140,6 +186,7 @@ namespace GameTest
                 if(counter >= WIDTH)
                 {
                     gameMap.RemoveAll(x => x.Y == tmp.Y);
+                    SCORE += 15;
                     for (int k = 0; k < gameMap.Count; k++)
                     {
                         if(gameMap[k].Y < tmp.Y)
@@ -154,9 +201,10 @@ namespace GameTest
         private void AddAndCreate()
         {
             AdditionBlocks(shape);
+            shape = prevShape;
+            prevShape = ShapeFactory.CreateShape(prevRandom.Next(7));
             SeekAndDestroy();
-            //shape = prevShape;
-            shape = ShapeFactory.CreateShape(globalRandom.Next(7));
+            //shape = ShapeFactory.CreateShape(globalRandom.Next(7));
         }
 
         public void GameLoop()
@@ -179,7 +227,8 @@ namespace GameTest
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            RepaintForm(mainBuffer);
+            RepaintForm();
+            RepaintForm(prevBuffer);
             GameLoop();
         }
 
@@ -187,11 +236,13 @@ namespace GameTest
         {
             if (e.KeyCode == Keys.Enter)
             {
-                timer.Interval = 100;
+                this.ClearForm();
+                timer.Interval = 150;
                 timer.Tick += Timer_Tick;
 
                 shape = ShapeFactory.CreateShape(globalRandom.Next(7));
-
+                prevShape = ShapeFactory.CreateShape(prevRandom.Next(7));
+           
                 timer.Enabled = true;
             }
             else if (e.KeyCode == Keys.Left)
@@ -212,8 +263,8 @@ namespace GameTest
             else if (e.KeyCode == Keys.Space)
             {
                 if (timer.Enabled)
-                    timer.Stop();
-                else timer.Start();
+                    timer.Enabled = false;
+                else timer.Enabled = true;
             }
         }
     }
