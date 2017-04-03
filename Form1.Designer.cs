@@ -48,11 +48,13 @@
             this.lbScore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbScore.AutoSize = true;
             this.lbScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbScore.Location = new System.Drawing.Point(409, 22);
+            this.lbScore.Location = new System.Drawing.Point(401, 32);
+            this.lbScore.MinimumSize = new System.Drawing.Size(60, 39);
             this.lbScore.Name = "lbScore";
-            this.lbScore.Size = new System.Drawing.Size(36, 39);
+            this.lbScore.Size = new System.Drawing.Size(60, 39);
             this.lbScore.TabIndex = 1;
             this.lbScore.Text = "0";
+            this.lbScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label1
             // 
@@ -85,6 +87,7 @@
             this.Name = "GameForm";
             this.Text = "Form1";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

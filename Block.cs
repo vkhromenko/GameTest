@@ -30,9 +30,10 @@ namespace GameTest
         Blue,
         DarkGreen,
         Brown,
-        DarkOrange,
+        OrangeRed,
         DarkSlateBlue,
         DimGray,
+        Gold,
     }
 
     class Block : ICloneable
@@ -42,7 +43,7 @@ namespace GameTest
         public BlockColor color;
 
         private Brush[] brushColor = new SolidBrush[] { new SolidBrush(Color.Blue), new SolidBrush(Color.DarkGreen), new SolidBrush(Color.Brown),
-                                      new SolidBrush(Color.DarkOrange), new SolidBrush(Color.DarkSlateBlue), new SolidBrush(Color.DimGray), new SolidBrush(Color.Teal) };
+                                      new SolidBrush(Color.OrangeRed), new SolidBrush(Color.DarkSlateBlue), new SolidBrush(Color.DimGray), new SolidBrush(Color.Orange) };
 
         internal Brush brush;
 

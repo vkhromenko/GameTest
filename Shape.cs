@@ -49,6 +49,7 @@ namespace GameTest
             {
                 blocksTemp[i] = blocks[i].Clone() as Block;
             }
+
             for (int i = 0; i < blocks.Length; i++)
             {
                 if (blocksTemp[i] != null)

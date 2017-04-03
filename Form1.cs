@@ -17,6 +17,9 @@ namespace GameTest
         public static int SCALE = 30;
         public static int SPEED = 1;
         public static int SCORE = 0;
+        public static bool speedFlag = false;
+
+        private int defaultInterval = 150;
 
         Shape shape;
         Shape prevShape;
@@ -167,6 +170,8 @@ namespace GameTest
         {
             Block tmp;
             int counter = 1;
+            float multiplier = 0.5f;
+            int preScore = 0;
 
             for (int i = 0; i < gameMap.Count; i++)
             {
@@ -185,8 +190,9 @@ namespace GameTest
                 }
                 if(counter >= WIDTH)
                 {
+                    preScore += 15;
+                    multiplier += 0.5f;
                     gameMap.RemoveAll(x => x.Y == tmp.Y);
-                    SCORE += 15;
                     for (int k = 0; k < gameMap.Count; k++)
                     {
                         if(gameMap[k].Y < tmp.Y)
@@ -196,6 +202,7 @@ namespace GameTest
                     }
                 }
             }
+            SCORE += (int) (preScore * multiplier);
         }
 
         private void AddAndCreate()
@@ -232,12 +239,22 @@ namespace GameTest
             GameLoop();
         }
 
+        private void DoSpeed(bool speedFlag)
+        {
+            if (speedFlag)
+            {
+                timer.Interval = (int)(defaultInterval / 5);
+            }else {
+                timer.Interval = defaultInterval;
+            }
+        }
+
         private void GameForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 this.ClearForm();
-                timer.Interval = 150;
+                timer.Interval = defaultInterval;
                 timer.Tick += Timer_Tick;
 
                 shape = ShapeFactory.CreateShape(globalRandom.Next(7));
@@ -249,11 +266,13 @@ namespace GameTest
             {
                 if (!ContainsBlock(shape, Direction.Left))
                     shape.MoveLeft();
+                    RepaintForm();
             }
             else if (e.KeyCode == Keys.Right)
             {
                 if (!ContainsBlock(shape, Direction.Right))
                     shape.MoveRight();
+                    RepaintForm();
             }
             else if (e.KeyCode == Keys.Up)
             {
@@ -263,8 +282,22 @@ namespace GameTest
             else if (e.KeyCode == Keys.Space)
             {
                 if (timer.Enabled)
-                    timer.Enabled = false;
-                else timer.Enabled = true;
+                    timer.Stop();
+                else timer.Start();
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                speedFlag = true;
+                DoSpeed(speedFlag);
+            }
+        }
+
+        private void GameForm_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Down)
+            {
+                speedFlag = false;
+                DoSpeed(speedFlag);
             }
         }
     }
