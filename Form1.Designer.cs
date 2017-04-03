@@ -85,7 +85,8 @@
             this.Controls.Add(this.lbScore);
             this.Controls.Add(this.pbMain);
             this.Name = "GameForm";
-            this.Text = "Form1";
+            this.Text = "Tetris";
+            this.TopMost = true;
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).EndInit();

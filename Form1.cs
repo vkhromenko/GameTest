@@ -17,7 +17,10 @@ namespace GameTest
         public static int SCALE = 30;
         public static int SPEED = 1;
         public static int SCORE = 0;
+
         public static bool speedFlag = false;
+
+        public static Difficulty DIFFICULTY;
 
         private int defaultInterval = 150;
 
@@ -43,6 +46,9 @@ namespace GameTest
         public GameForm()
         {
             InitializeComponent();
+            this.Visible = false;
+            this.pbMain.Focus();
+            new MenuForm(this);
             this.ClientSize = new Size(WIDTH * SCALE + 130, HEIGHT * SCALE);
             pbMain.ClientSize = new Size(WIDTH * SCALE, HEIGHT * SCALE);
             pbMain.BackColor = Color.LightGray;
@@ -299,6 +305,11 @@ namespace GameTest
                 speedFlag = false;
                 DoSpeed(speedFlag);
             }
+        }
+
+        private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
