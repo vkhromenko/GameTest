@@ -84,9 +84,13 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbScore);
             this.Controls.Add(this.pbMain);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "GameForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tetris";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.GameForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).EndInit();

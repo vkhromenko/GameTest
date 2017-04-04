@@ -46,9 +46,7 @@ namespace GameTest
         public GameForm()
         {
             InitializeComponent();
-            this.Visible = false;
-            this.pbMain.Focus();
-            new MenuForm(this);
+            this.Hide();
             this.ClientSize = new Size(WIDTH * SCALE + 130, HEIGHT * SCALE);
             pbMain.ClientSize = new Size(WIDTH * SCALE, HEIGHT * SCALE);
             pbMain.BackColor = Color.LightGray;
@@ -310,6 +308,12 @@ namespace GameTest
         private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void GameForm_Load(object sender, EventArgs e)
+        { 
+            Form menuForm = new MenuForm(this);
+            menuForm.Visible = true;
         }
     }
 }

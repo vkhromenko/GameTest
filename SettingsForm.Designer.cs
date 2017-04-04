@@ -100,6 +100,7 @@
             this.Controls.Add(this.rbMid);
             this.Controls.Add(this.rbLow);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
             this.Name = "SettingsForm";
             this.Text = "Settings";
             this.ResumeLayout(false);

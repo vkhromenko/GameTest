@@ -75,8 +75,12 @@ namespace GameTest
             this.Controls.Add(this.btExit);
             this.Controls.Add(this.btSettings);
             this.Controls.Add(this.btStart);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "MenuForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.ResumeLayout(false);
+
         }
 
         private void btExit_Click(object sender, EventArgs e)
@@ -92,7 +96,9 @@ namespace GameTest
 
         private void btSettings_Click(object sender, EventArgs e)
         {
-            new SettingsForm();
+            Form settings = new SettingsForm();
+            settings.Visible = true;
+            settings.Activate();
         }
     }
 }
