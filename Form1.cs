@@ -10,6 +10,13 @@ using System.Windows.Forms;
 
 namespace GameTest
 {
+    public enum Difficulty
+    {
+        Low,
+        Middle,
+        High,
+    }
+
     public partial class GameForm : Form
     {
         public static int WIDTH = 15;
@@ -20,9 +27,9 @@ namespace GameTest
 
         public static bool speedFlag = false;
 
-        public static Difficulty DIFFICULTY;
+        public static Difficulty DIFFICULTY = Difficulty.Low;
 
-        private int defaultInterval = 150;
+        private int defaultInterval;
 
         Shape shape;
         Shape prevShape;
@@ -46,7 +53,6 @@ namespace GameTest
         public GameForm()
         {
             InitializeComponent();
-            this.Hide();
             this.ClientSize = new Size(WIDTH * SCALE + 130, HEIGHT * SCALE);
             pbMain.ClientSize = new Size(WIDTH * SCALE, HEIGHT * SCALE);
             pbMain.BackColor = Color.LightGray;
@@ -253,11 +259,36 @@ namespace GameTest
             }
         }
 
+        private void CheckDifficulty()
+        {
+            if (rbLow.Checked)
+            {
+                GameForm.DIFFICULTY = Difficulty.Low;
+                defaultInterval = 150;
+            }
+            else if (rbMid.Checked)
+            {
+                GameForm.DIFFICULTY = Difficulty.Middle;
+                defaultInterval = 100;
+            }
+            else if (rbHigh.Checked)
+            {
+                GameForm.DIFFICULTY = Difficulty.High;
+                defaultInterval = 70;
+            }
+
+            rbLow.Hide();
+            rbMid.Hide();
+            rbHigh.Hide();
+        }
+
         private void GameForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 this.ClearForm();
+                CheckDifficulty();
+
                 timer.Interval = defaultInterval;
                 timer.Tick += Timer_Tick;
 
@@ -307,13 +338,8 @@ namespace GameTest
 
         private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            timer.Stop();
             Application.Exit();
-        }
-
-        private void GameForm_Load(object sender, EventArgs e)
-        { 
-            Form menuForm = new MenuForm(this);
-            menuForm.Visible = true;
         }
     }
 }

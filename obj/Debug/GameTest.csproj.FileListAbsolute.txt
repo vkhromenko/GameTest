@@ -7,5 +7,3 @@ C:\Users\vkhromenko\Documents\Visual Studio 2015\Projects\Logon_project\GameTest
 C:\Users\vkhromenko\Documents\Visual Studio 2015\Projects\Logon_project\GameTest\obj\Debug\GameTest.pdb
 C:\Users\vkhromenko\Documents\Visual Studio 2015\Projects\Logon_project\GameTest\obj\Debug\GameTest.GameForm.resources
 C:\Users\vkhromenko\Documents\Visual Studio 2015\Projects\Logon_project\GameTest\obj\Debug\GameTest.csprojResolveAssemblyReference.cache
-C:\Users\vkhromenko\Documents\Visual Studio 2015\Projects\Logon_project\GameTest\obj\Debug\GameTest.MenuForm.resources
-C:\Users\vkhromenko\Documents\Visual Studio 2015\Projects\Logon_project\GameTest\obj\Debug\GameTest.SettingsForm.resources

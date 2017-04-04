@@ -32,6 +32,10 @@
             this.lbScore = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pnPrev = new System.Windows.Forms.Panel();
+            this.rbHigh = new System.Windows.Forms.RadioButton();
+            this.rbMid = new System.Windows.Forms.RadioButton();
+            this.rbLow = new System.Windows.Forms.RadioButton();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,11 +79,62 @@
             this.pnPrev.Size = new System.Drawing.Size(112, 121);
             this.pnPrev.TabIndex = 3;
             // 
+            // rbHigh
+            // 
+            this.rbHigh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rbHigh.AutoSize = true;
+            this.rbHigh.Location = new System.Drawing.Point(390, 334);
+            this.rbHigh.Name = "rbHigh";
+            this.rbHigh.Size = new System.Drawing.Size(47, 17);
+            this.rbHigh.TabIndex = 4;
+            this.rbHigh.TabStop = true;
+            this.rbHigh.Text = "High";
+            this.rbHigh.UseVisualStyleBackColor = true;
+            // 
+            // rbMid
+            // 
+            this.rbMid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rbMid.AutoSize = true;
+            this.rbMid.Location = new System.Drawing.Point(390, 311);
+            this.rbMid.Name = "rbMid";
+            this.rbMid.Size = new System.Drawing.Size(56, 17);
+            this.rbMid.TabIndex = 4;
+            this.rbMid.TabStop = true;
+            this.rbMid.Text = "Middle";
+            this.rbMid.UseVisualStyleBackColor = true;
+            // 
+            // rbLow
+            // 
+            this.rbLow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rbLow.AutoSize = true;
+            this.rbLow.Location = new System.Drawing.Point(390, 288);
+            this.rbLow.Name = "rbLow";
+            this.rbLow.Size = new System.Drawing.Size(45, 17);
+            this.rbLow.TabIndex = 4;
+            this.rbLow.TabStop = true;
+            this.rbLow.Text = "Low";
+            this.rbLow.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(386, 259);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(75, 20);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Difficulty";
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(494, 623);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.rbLow);
+            this.Controls.Add(this.rbMid);
+            this.Controls.Add(this.rbHigh);
             this.Controls.Add(this.pnPrev);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbScore);
@@ -90,7 +145,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tetris";
             this.TopMost = true;
-            this.Load += new System.EventHandler(this.GameForm_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameForm_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).EndInit();
@@ -105,6 +160,10 @@
         private System.Windows.Forms.Label lbScore;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pnPrev;
+        private System.Windows.Forms.RadioButton rbHigh;
+        private System.Windows.Forms.RadioButton rbMid;
+        private System.Windows.Forms.RadioButton rbLow;
+        private System.Windows.Forms.Label label2;
     }
 }
 
