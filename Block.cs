@@ -36,7 +36,7 @@ namespace GameTest
         Gold,
     }
 
-    class Block : ICloneable
+    internal class Block : ICloneable
     {
         public int X { get; set; }
         public int Y { get; set; }

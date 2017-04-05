@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace GameTest
 {
-    abstract class Shape
+    internal abstract class Shape
     {
-        internal Block[] blocks = new Block[4];
+        public Block[] blocks = new Block[4];
 
         public Block this[int index]
         {
@@ -32,7 +32,7 @@ namespace GameTest
 
         public void PaintShape(BufferedGraphics buffer)
         {
-            for(int i = 0; i < blocks.Length; i++)
+            for (int i = 0; i < blocks.Length; i++)
             {
                 blocks[i].PaintBlock(buffer);
             }
@@ -45,7 +45,7 @@ namespace GameTest
 
             Block[] blocksTemp = new Block[4];
 
-            for(int i = 0; i < blocks.Length; i++)
+            for (int i = 0; i < blocks.Length; i++)
             {
                 blocksTemp[i] = blocks[i].Clone() as Block;
             }
@@ -54,10 +54,10 @@ namespace GameTest
             {
                 if (blocksTemp[i] != null)
                 {
-                    tmpYY = blocksTemp[i].Y;
-                    if (!((tmpYY += 1 * GameForm.SPEED) >= GameForm.HEIGHT))
+                    tmpYY = blocksTemp[i].Y + 1;
+                    if (!(tmpYY >= GameForm.HEIGHT))
                     {
-                        blocksTemp[i].Y += 1 * GameForm.SPEED;
+                        blocksTemp[i].Y += 1;
                         flag = true;
                     }
                     else
@@ -66,7 +66,8 @@ namespace GameTest
                         break;
                     }
                 }
-                else {
+                else
+                {
                     flag = false;
                     break;
                 }

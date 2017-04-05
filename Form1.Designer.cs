@@ -35,8 +35,10 @@
             this.rbHigh = new System.Windows.Forms.RadioButton();
             this.rbMid = new System.Windows.Forms.RadioButton();
             this.rbLow = new System.Windows.Forms.RadioButton();
+            this.gbDif = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
+            this.gbDif.SuspendLayout();
             this.SuspendLayout();
             // 
             // pbMain
@@ -52,7 +54,7 @@
             this.lbScore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbScore.AutoSize = true;
             this.lbScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbScore.Location = new System.Drawing.Point(401, 32);
+            this.lbScore.Location = new System.Drawing.Point(397, 40);
             this.lbScore.MinimumSize = new System.Drawing.Size(60, 39);
             this.lbScore.Name = "lbScore";
             this.lbScore.Size = new System.Drawing.Size(60, 39);
@@ -65,7 +67,7 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(398, 71);
+            this.label1.Location = new System.Drawing.Point(396, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(68, 25);
             this.label1.TabIndex = 2;
@@ -83,59 +85,77 @@
             // 
             this.rbHigh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rbHigh.AutoSize = true;
-            this.rbHigh.Location = new System.Drawing.Point(390, 334);
+            this.rbHigh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rbHigh.Location = new System.Drawing.Point(6, 81);
             this.rbHigh.Name = "rbHigh";
-            this.rbHigh.Size = new System.Drawing.Size(47, 17);
+            this.rbHigh.Size = new System.Drawing.Size(55, 21);
             this.rbHigh.TabIndex = 4;
             this.rbHigh.TabStop = true;
             this.rbHigh.Text = "High";
             this.rbHigh.UseVisualStyleBackColor = true;
+            this.rbHigh.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyDown);
             // 
             // rbMid
             // 
             this.rbMid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rbMid.AutoSize = true;
-            this.rbMid.Location = new System.Drawing.Point(390, 311);
+            this.rbMid.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rbMid.Location = new System.Drawing.Point(6, 52);
             this.rbMid.Name = "rbMid";
-            this.rbMid.Size = new System.Drawing.Size(56, 17);
+            this.rbMid.Size = new System.Drawing.Size(67, 21);
             this.rbMid.TabIndex = 4;
             this.rbMid.TabStop = true;
             this.rbMid.Text = "Middle";
             this.rbMid.UseVisualStyleBackColor = true;
+            this.rbMid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyDown);
             // 
             // rbLow
             // 
             this.rbLow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rbLow.AutoSize = true;
-            this.rbLow.Location = new System.Drawing.Point(390, 288);
+            this.rbLow.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rbLow.Location = new System.Drawing.Point(6, 25);
             this.rbLow.Name = "rbLow";
-            this.rbLow.Size = new System.Drawing.Size(45, 17);
+            this.rbLow.Size = new System.Drawing.Size(51, 21);
             this.rbLow.TabIndex = 4;
             this.rbLow.TabStop = true;
             this.rbLow.Text = "Low";
             this.rbLow.UseVisualStyleBackColor = true;
+            this.rbLow.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyDown);
+            // 
+            // gbDif
+            // 
+            this.gbDif.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbDif.Controls.Add(this.rbLow);
+            this.gbDif.Controls.Add(this.rbHigh);
+            this.gbDif.Controls.Add(this.rbMid);
+            this.gbDif.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.gbDif.Location = new System.Drawing.Point(380, 249);
+            this.gbDif.Name = "gbDif";
+            this.gbDif.Size = new System.Drawing.Size(102, 108);
+            this.gbDif.TabIndex = 6;
+            this.gbDif.TabStop = false;
+            this.gbDif.Text = "Difficulty";
             // 
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(386, 259);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(398, 94);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 20);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Difficulty";
+            this.label2.Size = new System.Drawing.Size(56, 25);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Next";
             // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(494, 623);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.rbLow);
-            this.Controls.Add(this.rbMid);
-            this.Controls.Add(this.rbHigh);
+            this.Controls.Add(this.gbDif);
             this.Controls.Add(this.pnPrev);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbScore);
             this.Controls.Add(this.pbMain);
@@ -149,6 +169,8 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).EndInit();
+            this.gbDif.ResumeLayout(false);
+            this.gbDif.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,6 +185,7 @@
         private System.Windows.Forms.RadioButton rbHigh;
         private System.Windows.Forms.RadioButton rbMid;
         private System.Windows.Forms.RadioButton rbLow;
+        private System.Windows.Forms.GroupBox gbDif;
         private System.Windows.Forms.Label label2;
     }
 }

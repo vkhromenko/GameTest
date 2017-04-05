@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace GameTest
 {
-    public enum Difficulty
+    internal enum Difficulty
     {
         Low,
         Middle,
         High,
     }
 
-    public partial class GameForm : Form
+    internal partial class GameForm : Form
     {
         public static int WIDTH = 15;
         public static int HEIGHT = 25;
@@ -31,7 +31,7 @@ namespace GameTest
 
         private int defaultInterval;
 
-        Shape shape;
+        public Shape Shape { get; set; }
         Shape prevShape;
 
         private Timer timer;
@@ -47,7 +47,7 @@ namespace GameTest
         public Random globalRandom;
         public Random prevRandom;
 
-        List<Block> gameMap;
+        public static List<Block> gameMap;
 
 
         public GameForm()
@@ -59,11 +59,11 @@ namespace GameTest
 
             mainGraphics = pbMain.CreateGraphics();
             mainContext = new BufferedGraphicsContext();
-            mainBuffer = mainContext.Allocate(mainGraphics, new Rectangle(0, 0, pbMain.Width, pbMain.Height));
+            //mainBuffer = mainContext.Allocate(mainGraphics, new Rectangle(0, 0, pbMain.Width, pbMain.Height));
 
             prevGraphics = pnPrev.CreateGraphics();
             prevContext = new BufferedGraphicsContext();
-            prevBuffer = prevContext.Allocate(prevGraphics, new Rectangle(0, 0, pnPrev.Width, pnPrev.Height));
+           //prevBuffer = prevContext.Allocate(prevGraphics, new Rectangle(0, 0, pnPrev.Width, pnPrev.Height));
 
             globalRandom = new Random(DateTime.Now.Millisecond);
             prevRandom = new Random(DateTime.Now.Millisecond + 365);
@@ -81,20 +81,24 @@ namespace GameTest
             {
                 block.PaintBlock(mainBuffer);
             }
-            shape.PaintShape(mainBuffer);
+            Shape.PaintShape(mainBuffer);
             mainBuffer.Render();
             lbScore.Text = SCORE.ToString();
         }
 
         private void ClearForm()
         {
+            mainBuffer = mainContext.Allocate(mainGraphics, new Rectangle(0, 0, pbMain.Width, pbMain.Height));
+            prevBuffer = prevContext.Allocate(prevGraphics, new Rectangle(0, 0, pnPrev.Width, pnPrev.Height));
+
             mainBuffer.Graphics.Clear(Color.Ivory);
             PrintGrid.PrintGridFromForm(mainBuffer);
             prevBuffer.Graphics.Clear(Color.LightGray);
             gameMap.Clear();
-            shape = null;
+            Shape = null;
             prevShape = null;
             timer.Dispose();
+            timer = new Timer();
         }
 
         public void RepaintForm(BufferedGraphics prevBuffer)
@@ -119,6 +123,27 @@ namespace GameTest
             }
         }
 
+        private void GameOverDialog()
+        {
+            string message = "Хотите попробовать еще раз?";
+            string caption = "Game Over!";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+
+            DialogResult result;
+            result = MessageBox.Show(message, caption, buttons);
+
+            if(result == DialogResult.Yes)
+            {
+                StartNewGame();
+            }
+            else
+            {
+                rbLow.Enabled = true;
+                rbMid.Enabled = true;
+                rbHigh.Enabled = true;
+            }
+        }
+
         private bool AdditionBlocks(Shape shape)
         {
             bool flag = false;
@@ -128,7 +153,8 @@ namespace GameTest
                 {
                     flag = false;
                     timer.Stop();
-                    MessageBox.Show("Game Over!");
+                    GameOverDialog();
+
                     break;
                 }
                 else
@@ -140,7 +166,7 @@ namespace GameTest
             return flag;
         }
 
-        private bool ContainsBlock(Shape shape)
+        public bool ContainsBlock(Shape shape)
         {
             bool flag = false;
             for (int i = 0; i < gameMap.Count; i++)
@@ -217,8 +243,8 @@ namespace GameTest
 
         private void AddAndCreate()
         {
-            AdditionBlocks(shape);
-            shape = prevShape;
+            AdditionBlocks(Shape);
+            Shape = prevShape;
             prevShape = ShapeFactory.CreateShape(prevRandom.Next(7));
             SeekAndDestroy();
             //shape = ShapeFactory.CreateShape(globalRandom.Next(7));
@@ -228,9 +254,9 @@ namespace GameTest
         {
             bool isMoving = false;
 
-            if (!ContainsBlock(shape))
+            if (!ContainsBlock(Shape))
             {
-                isMoving = shape.Move();
+                isMoving = Shape.Move();
                 if (!isMoving)
                 {
                     AddAndCreate();
@@ -277,42 +303,33 @@ namespace GameTest
                 defaultInterval = 70;
             }
 
-            rbLow.Hide();
-            rbMid.Hide();
-            rbHigh.Hide();
+            rbLow.Enabled = false;
+            rbMid.Enabled = false;
+            rbHigh.Enabled = false;
         }
 
         private void GameForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                this.ClearForm();
-                CheckDifficulty();
-
-                timer.Interval = defaultInterval;
-                timer.Tick += Timer_Tick;
-
-                shape = ShapeFactory.CreateShape(globalRandom.Next(7));
-                prevShape = ShapeFactory.CreateShape(prevRandom.Next(7));
-           
-                timer.Enabled = true;
+                StartNewGame();
             }
             else if (e.KeyCode == Keys.Left)
             {
-                if (!ContainsBlock(shape, Direction.Left))
-                    shape.MoveLeft();
+                if (!ContainsBlock(Shape, Direction.Left))
+                    Shape.MoveLeft();
                     RepaintForm();
             }
             else if (e.KeyCode == Keys.Right)
             {
-                if (!ContainsBlock(shape, Direction.Right))
-                    shape.MoveRight();
+                if (!ContainsBlock(Shape, Direction.Right))
+                    Shape.MoveRight();
                     RepaintForm();
             }
             else if (e.KeyCode == Keys.Up)
             {
-                if (!ContainsBlock(shape, Direction.Left) && !ContainsBlock(shape, Direction.Right))
-                    shape.Rotate();
+                if (!ContainsBlock(Shape, Direction.Left) && !ContainsBlock(Shape, Direction.Right))
+                Shape.Rotate();
             }
             else if (e.KeyCode == Keys.Space)
             {
@@ -325,6 +342,20 @@ namespace GameTest
                 speedFlag = true;
                 DoSpeed(speedFlag);
             }
+        }
+
+        private void StartNewGame()
+        {
+            this.ClearForm();
+            CheckDifficulty();
+
+            timer.Interval = defaultInterval;
+            timer.Tick += Timer_Tick;
+
+            Shape = ShapeFactory.CreateShape(globalRandom.Next(7));
+            prevShape = ShapeFactory.CreateShape(prevRandom.Next(7));
+
+            timer.Enabled = true;
         }
 
         private void GameForm_KeyUp(object sender, KeyEventArgs e)
